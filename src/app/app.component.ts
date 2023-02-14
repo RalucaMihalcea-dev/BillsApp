@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'BillsApp';
   clients: Array<Client> | undefined;
 
   constructor(private billService: BillService) {}
@@ -18,7 +17,7 @@ export class AppComponent implements OnInit {
   }
 
   loadClients(): void {
-    this.billService.getClient().subscribe((data) => {
+    this.billService.getClients().subscribe((data) => {
       this.clients = data;
       console.log(data);
     });

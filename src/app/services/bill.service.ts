@@ -12,7 +12,7 @@ export class BillService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getClient(): Observable<Array<Client>> {
+  getClients(): Observable<Array<Client>> {
     return this.httpClient.get<Array<Client>>(this.baseUrl);
   }
 }
