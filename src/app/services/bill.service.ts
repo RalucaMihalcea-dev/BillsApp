@@ -1,7 +1,7 @@
-import { Client } from './../models/client';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Client } from './../models/client';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,6 @@ export class BillService {
   constructor(private httpClient: HttpClient) {}
 
   getClients(): Observable<Array<Client>> {
-    const test = '';
     return this.httpClient.get<Array<Client>>(this.baseUrl);
   }
 }
