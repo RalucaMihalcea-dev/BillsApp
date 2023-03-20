@@ -1,20 +1,16 @@
-import { BillService } from './services/bill.service';
+import { Component } from '@angular/core';
 import { Client } from './models/client';
-import { Component, OnInit } from '@angular/core';
+import { BillService } from './services/bill.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   clients: Array<Client> | undefined;
 
   constructor(private billService: BillService) {}
-
-  ngOnInit(): void {
-    this.loadClients();
-  }
 
   loadClients(): void {
     this.billService.getClients().subscribe((data) => {

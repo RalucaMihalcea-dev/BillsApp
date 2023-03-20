@@ -1,8 +1,7 @@
-import { TestBed, getTestBed } from '@angular/core/testing';
-import { BillService } from './bill.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { Client } from '../models/client';
+import { getTestBed, TestBed } from '@angular/core/testing';
 import { dummyClientsResponse } from '../mocks/client-dummy';
+import { BillService } from './bill.service';
 
 describe('BillService', () => {
   let service: BillService;

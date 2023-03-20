@@ -1,4 +1,4 @@
-import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { AppComponent } from './app.component';
 import { dummyClientsResponse } from './mocks/client-dummy';
@@ -15,13 +15,14 @@ describe('AppComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [AppComponent],
-      providers: [{ provide: BillService, useValue: billServiceSpy }]
-    }).compileComponents().then(() => {
-      fixture = TestBed.createComponent(AppComponent);
-      app = fixture.componentInstance;
-      fixture.detectChanges();
-    });
-
+      providers: [{ provide: BillService, useValue: billServiceSpy }],
+    })
+      .compileComponents()
+      .then(() => {
+        fixture = TestBed.createComponent(AppComponent);
+        app = fixture.componentInstance;
+        fixture.detectChanges();
+      });
   });
 
   it('should create the app', () => {
@@ -33,9 +34,8 @@ describe('AppComponent', () => {
     expect(billServiceSpy.getClients).toHaveBeenCalled();
   });
 
-  it('loadClients expect to return a client list', (() => {
+  it('loadClients expect to return a client list', () => {
     app.loadClients();
     expect(app.clients).toEqual(dummyClientsResponse);
-  }));
-
+  });
 });

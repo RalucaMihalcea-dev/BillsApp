@@ -8,11 +8,12 @@ import { Observable } from 'rxjs';
 })
 export class BillService {
   public API = 'https://localhost:7164/api';
-  public baseUrl = `${this.API}/Client`;
+  public baseUrl = `${this.API}/client`;
 
   constructor(private httpClient: HttpClient) {}
 
   getClients(): Observable<Array<Client>> {
+    const test = '';
     return this.httpClient.get<Array<Client>>(this.baseUrl);
   }
 }
