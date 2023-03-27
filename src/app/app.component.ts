@@ -16,6 +16,7 @@ export class AppComponent {
     this.billService.getClients().subscribe((data) => {
       this.clients = data;
       console.log(data);
+      console.log(data);
     });
   }
 }
