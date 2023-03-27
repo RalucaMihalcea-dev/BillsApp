@@ -18,12 +18,17 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+          
+      - name: Install Jasmine
+        run: npm install jasmine --save-dev
 
       - name: Lint
         run: npm run lint
 
-      - name: Tests
+      - name: Run Jasmine tests in production mode
         run: npm run test:prod
+        env:
+         NODE_ENV: production
 
       - name: Replace secret
         uses: cschleiden/replace-tokens@v1
