@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+mat-card {
+  max-width: 500px;
+}
+
+.example-form {
+  min-width: 150px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
