@@ -17,6 +17,7 @@ export class AppComponent {
       this.clients = data;
       console.log(data);
       console.log(data);
+      console.log(data);
     });
   }
 }
