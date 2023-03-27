@@ -26,7 +26,7 @@ jobs:
         run: npm run lint
 
       - name: Run Jasmine tests in production mode
-        run: jasmine spec/**/*.spec.ts
+        run: npm run test:prod
         env:
          NODE_ENV: production
 
