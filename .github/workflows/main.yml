@@ -1,7 +1,7 @@
 name: CI / CD for Angular
 on:
   push:
-    branches: [ "master" ]
+    branches: ['master']
 
 jobs:
   build-and-deploy:
@@ -41,9 +41,6 @@ jobs:
         uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: gh-pages
-          build_dir: dist/weather-app
+          build_dir: dist/bills-app
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
-
