@@ -6,8 +6,7 @@
     "start": "ng serve ",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "test:prod": "NODE_ENV=production jasmine",
+    "test": "ng test --watch=false",
     "lint": "ng lint",
     "prepare": "husky install"
   },
