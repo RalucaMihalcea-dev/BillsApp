@@ -11,6 +11,7 @@ export class BillService {
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<User[]> {
+    console.log('here');
     return this.http.get<User[]>(`${environment.apiUrl}/user`);
   }
 }
