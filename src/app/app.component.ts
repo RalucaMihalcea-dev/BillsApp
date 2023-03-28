@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
 
   constructor(private tokenStorageService: TokenStorageService) {}
 
+
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
@@ -30,5 +31,6 @@ export class AppComponent implements OnInit {
   logout(): void {
     this.tokenStorageService.signOut();
     window.location.reload();
+
   }
 }
