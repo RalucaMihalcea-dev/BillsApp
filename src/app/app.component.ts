@@ -1,23 +1,34 @@
-import { Component } from '@angular/core';
-import { Client } from './models/client';
-import { BillService } from './services/bill.service';
+import { Component, OnInit } from '@angular/core';
+import { TokenStorageService } from './services/token-storage.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  clients: Array<Client> | undefined;
+export class AppComponent implements OnInit {
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showMemberBoard = false;
+  username?: string;
 
-  constructor(private billService: BillService) {}
+  constructor(private tokenStorageService: TokenStorageService) {}
 
-  loadClients(): void {
-    this.billService.getClients().subscribe((data) => {
-      this.clients = data;
-      console.log(data);
-      console.log(data);
-      console.log(data);
-    });
+  ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const roles = this.tokenStorageService.getUserRoles();
+      this.roles = roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showMemberBoard = this.roles.includes('ROLE_MEMBER');
+    }
+  }
+
+  logout(): void {
+    this.tokenStorageService.signOut();
+    window.location.reload();
   }
 }

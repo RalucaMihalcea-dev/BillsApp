@@ -1,4 +1,4 @@
-import { Client } from '../models/client';
+import { Client } from '../models/user';
 
 export const dummyClientsResponse = [
   { id: 1, firstName: 'George', lastName: 'Bluth' } as Client,

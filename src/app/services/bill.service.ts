@@ -1,18 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Client } from './../models/client';
+import { User } from '../models/user';
+import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BillService {
-  public API = 'https://localhost:7164/api';
-  public baseUrl = `${this.API}/client`;
+  constructor(private http: HttpClient) {}
 
-  constructor(private httpClient: HttpClient) {}
-
-  getClients(): Observable<Array<Client>> {
-    return this.httpClient.get<Array<Client>>(this.baseUrl);
+  getAll(): Observable<User[]> {
+    return this.http.get<User[]>(`${environment.apiUrl}/user`);
   }
 }
