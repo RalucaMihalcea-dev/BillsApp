@@ -30,8 +30,7 @@ export class RegisterComponent {
 
   onSubmit(): void {
     this.authService.register(this.registerForm.value).subscribe({
-      next: (data) => {
-        console.log(data);
+      next: () => {
         this.isSuccessful = true;
         this.isSignUpFailed = false;
       },

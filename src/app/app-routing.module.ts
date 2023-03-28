@@ -17,7 +17,6 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  // otherwise redirect to home
   { path: '**', redirectTo: '' },
 ];
 

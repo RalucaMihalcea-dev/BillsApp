@@ -28,8 +28,6 @@ export class TokenStorageService {
 
   public getUserRoles(): Role[] {
     const userRoles = window.sessionStorage.getItem(USER_ROLES);
-    console.log('UserRoles: ' + userRoles);
-
     if (userRoles != null) {
       return JSON.parse(userRoles) as Role[];
     }
