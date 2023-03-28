@@ -1,38 +1,46 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { getTestBed, TestBed } from '@angular/core/testing';
-import { dummyClientsResponse } from '../mocks/client-dummy';
+import { TestBed } from '@angular/core/testing';
+import { environment } from 'src/environments/environment';
+import { User } from '../models/user';
 import { BillService } from './bill.service';
 
 describe('BillService', () => {
-  let service: BillService;
-  let injector: TestBed;
-  let httpMock: HttpTestingController;
+  let billService: BillService;
+  let httpTestingController: HttpTestingController;
+  const apiUrl = environment.apiUrl;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [BillService],
     });
-    injector = getTestBed();
-    service = TestBed.inject(BillService);
-    httpMock = injector.get(HttpTestingController);
+    billService = TestBed.inject(BillService);
+    httpTestingController = TestBed.inject(HttpTestingController);
   });
 
   afterEach(() => {
-    httpMock.verify();
+    httpTestingController.verify();
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(billService).toBeTruthy();
   });
 
-  xit('getUserList() should return data', () => {
-    service.getClients().subscribe((res) => {
-      expect(res).toEqual(dummyClientsResponse);
+  it('should get all users', () => {
+    const expectedResponse: User[] = [
+      { id: 1, firstName: 'George', lastName: 'Bluth' } as User,
+      { id: 2, firstName: 'Janet', lastName: 'Weaver' } as User,
+      { id: 3, firstName: 'Emma', lastName: 'Wong' } as User,
+    ];
+
+    billService.getAll().subscribe((response) => {
+      expect(response).toEqual(expectedResponse);
     });
 
-    const req = httpMock.expectOne('https://localhost:7164/api/Client');
-    expect(req.request.method).toBe('GET');
-    req.flush(dummyClientsResponse);
+    const req = httpTestingController.expectOne(`${apiUrl}/user`);
+
+    expect(req.request.method).toEqual('GET');
+
+    req.flush(expectedResponse);
   });
 });
