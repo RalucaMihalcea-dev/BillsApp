@@ -41,7 +41,7 @@ jobs:
         uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: gh-pages
-          build_dir: /bills-app
+          build_dir: dist/BillsApp
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
