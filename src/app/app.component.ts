@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Role } from 'src/app/models/role';
 import { TokenStorageService } from './services/token-storage.service';
 
 @Component({
@@ -22,8 +23,8 @@ export class AppComponent implements OnInit {
       const roles = this.tokenStorageService.getUserRoles();
       this.roles = roles;
 
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showMemberBoard = this.roles.includes('ROLE_MEMBER');
+      this.showAdminBoard = this.roles.includes(Role.Admin);
+      this.showMemberBoard = this.roles.includes(Role.Member);
     }
   }
 

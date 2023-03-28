@@ -1,51 +1,51 @@
-import { TestBed } from '@angular/core/testing';
-import { Role } from './models/role';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Role } from 'src/app/models/role';
+import { AppComponent } from './app.component';
 import { TokenStorageService } from './services/token-storage.service';
 
-describe('TokenStorageService', () => {
-  let tokenStorageService: TokenStorageService;
+describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let tokenStorageServiceSpy: jasmine.SpyObj<TokenStorageService>;
+
+  beforeEach(async () => {
+    tokenStorageServiceSpy = jasmine.createSpyObj('TokenStorageService', [
+      'getToken',
+      'getUserRoles',
+      'signOut',
+    ]);
+
+    await TestBed.configureTestingModule({
+      declarations: [AppComponent],
+      providers: [{ provide: TokenStorageService, useValue: tokenStorageServiceSpy }],
+    }).compileComponents();
+  });
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [TokenStorageService],
-    });
-
-    tokenStorageService = TestBed.inject(TokenStorageService);
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
-  afterEach(() => {
-    window.sessionStorage.clear();
+  it('should create the app', () => {
+    expect(component).toBeTruthy();
   });
 
-  it('should be created', () => {
-    expect(tokenStorageService).toBeTruthy();
+  it('should show admin board if user has admin role', () => {
+    tokenStorageServiceSpy.getToken.and.returnValue('adminToken');
+    tokenStorageServiceSpy.getUserRoles.and.returnValue([Role.Admin]);
+
+    component.ngOnInit();
+
+    expect(component.showAdminBoard).toBeTrue();
   });
 
-  it('should save and retrieve token', () => {
-    const expectedToken = 'abc123';
+  it('should show member board if user has member role', () => {
+    tokenStorageServiceSpy.getToken.and.returnValue('memberToken');
+    tokenStorageServiceSpy.getUserRoles.and.returnValue([Role.Member]);
 
-    tokenStorageService.saveToken(expectedToken);
+    component.ngOnInit();
 
-    const retrievedToken = tokenStorageService.getToken();
-
-    expect(retrievedToken).toEqual(expectedToken);
-  });
-
-  it('should save and retrieve user roles', () => {
-    const expectedRoles = [Role.Admin, Role.Member];
-
-    tokenStorageService.saveUserRoles(expectedRoles);
-
-    const retrievedRoles = tokenStorageService.getUserRoles();
-
-    expect(retrievedRoles).toEqual(expectedRoles);
-  });
-
-  it('should clear storage on sign out', () => {
-    spyOn(window.sessionStorage, 'clear');
-
-    tokenStorageService.signOut();
-
-    expect(window.sessionStorage.clear).toHaveBeenCalled();
+    expect(component.showMemberBoard).toBeTrue();
   });
 });
