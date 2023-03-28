@@ -5,7 +5,6 @@ import { TokenStorageService } from './services/token-storage.service';
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
-  let tokenStorageService: TokenStorageService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -17,7 +16,6 @@ describe('AppComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
-    tokenStorageService = TestBed.inject(TokenStorageService);
   });
 
   it('should create the app', () => {
