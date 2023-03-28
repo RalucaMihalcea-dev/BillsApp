@@ -26,7 +26,6 @@
     "@angular/router": "^15.1.4",
     "bootstrap": "^5.2.3",
     "json-server": "^0.17.3",
-    "ngrx-toastr": "^2.2.9",
     "ngx-toastr": "^16.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
